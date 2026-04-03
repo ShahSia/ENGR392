@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyond The Screen</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1e293b;
+      background: linear-gradient(to bottom, #fff1f2, #fff7ed, #f0f9ff);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 16px;
+    }
+
+    .brand h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .brand p {
+      color: #64748b;
+      font-size: 0.92rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      color: #475569;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: #0f172a;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .activity-card,
+    .category-card,
+    .info-card,
+    .search-card-wrap {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+
+    .btn-dark {
+      background: #0f172a;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #f43f5e;
+      color: white;
+      box-shadow: 0 12px 24px rgba(244, 63, 94, 0.18);
+    }
+
+    .btn-light {
+      background: white;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 70px 0 50px;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 180px;
+      height: 180px;
+      background: #f9a8d4;
+      top: 40px;
+      left: 20px;
+    }
+
+    .blob-2 {
+      width: 220px;
+      height: 220px;
+      background: #fde68a;
+      top: 20px;
+      right: 20px;
+    }
+
+    .blob-3 {
+      width: 240px;
+      height: 240px;
+      background: #7dd3fc;
+      bottom: 10px;
+      left: 35%;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-block;
+      background: white;
+      color: #f43f5e;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .hero h2 {
+      margin-top: 20px;
+      font-size: clamp(2.3rem, 6vw, 4.4rem);
+      line-height: 1.05;
+      font-weight: 900;
+      max-width: 650px;
+    }
+
+    .hero-text {
+      margin-top: 18px;
+      max-width: 600px;
+      color: #475569;
+      font-size: 1.1rem;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .search-card-wrap {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 32px;
+      padding: 18px;
+      box-shadow: 0 24px 50px rgba(251, 146, 60, 0.12);
+    }
+
+    .search-card {
+      background: #0f172a;
+      color: white;
+      border-radius: 26px;
+      padding: 24px;
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: white;
+      outline: none;
+      font-size: 0.98rem;
+    }
+
+    .input::placeholder {
+      color: #94a3b8;
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .btn-search {
+      width: 100%;
+      margin-top: 16px;
+      border-radius: 18px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      background: linear-gradient(to right, #fb7185, #fb923c);
+      color: white;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 28px 0 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h3 {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .section-head p {
+      color: #64748b;
+      margin-top: 6px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .category-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid white;
+      border-radius: 28px;
+      padding: 22px 18px;
+      box-shadow: 0 16px 28px rgba(15, 23, 42, 0.05);
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .category-card:hover,
+    .activity-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .category-card.active-category {
+      border: 2px solid #f43f5e;
+      box-shadow: 0 16px 28px rgba(244, 63, 94, 0.18);
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(to bottom right, #ffe4e6, #ffedd5);
+      margin-bottom: 14px;
+    }
+
+    .category-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .category-card p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-chip {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #334155;
+    }
+
+    .filter-chip.active {
+      background: #0f172a;
+      color: white;
+      border-color: #0f172a;
+    }
+
+    .activities {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .activity-card {
+      background: white;
+      border: 1px solid white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.06);
+      transition: 0.2s ease;
+    }
+
+    .activity-image {
+      height: 180px;
+      background: linear-gradient(to bottom right, #fecdd3, #fed7aa, #bae6fd);
+    }
+
+    .activity-content {
+      padding: 20px;
+    }
+
+    .activity-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      background: #fff1f2;
+      color: #f43f5e;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .age {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .activity-card h4 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .activity-desc {
+      font-size: 0.94rem;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+
+    .meta {
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .card-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+      border-radius: 18px;
+      background: #0f172a;
+      color: white;
+      padding: 13px 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 8px;
+      padding-bottom: 50px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.05);
+    }
+
+    .info-card .small {
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .pink { color: #f43f5e; }
+    .orange { color: #f97316; }
+    .blue { color: #0ea5e9; }
+
+    .info-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .info-card p {
+      color: #64748b;
+    }
+
+    .no-results {
+      display: none;
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+      color: #475569;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1100px) {
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .activities {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 45px;
+      }
+
+      .topbar-inner {
+        flex-wrap: wrap;
+      }
+
+      .search-grid,
+      .activities,
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <h1>Beyond The Screen</h1>
+        <p>Find fun things to do near you</p>
+      </div>
+
+      <a class="btn btn-dark" href="#">Sign In</a>
+    </div>
+  </header>
+
+  <section class="hero fade-in-section">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">Discover activities by age, date, and category</span>
+        <h2>Helping kids unplug and connect in the real world.</h2>
+        <p class="hero-text">
+          Browse local kids activities, compare options, and quickly find the best events for your child’s age and interests.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#featured">Explore Activities</a>
+          <a class="btn btn-primary" href="#why-it-matters">Our Mission</a>
+          <a class="btn btn-light" href="#get-involved">Get Involved</a>
+          <a class="btn btn-light" href="#discover">View Categories</a>
+          <a class="btn btn-light" href="#partners">Our Partners</a>
+        </div>
+      </div>
+
+      <div class="search-card-wrap">
+        <div class="search-card">
+          <label class="field-label" for="search">Search</label>
+          <input class="input" id="search" type="text" placeholder="Search activities, places, or topics" />
+
+          <div class="search-grid">
+            <div>
+              <label class="field-label" for="age">Age group</label>
+              <select class="select" id="age">
+                <option>All ages</option>
+                <option>Ages 3–5</option>
+                <option>Ages 6–8</option>
+                <option>Ages 9–12</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="date">Date</label>
+              <select class="select" id="date">
+                <option>This week</option>
+                <option>Today</option>
+                <option>This weekend</option>
+                <option>Next week</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn-search" id="find-activities-btn" type="button">Find Activities</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="families" class="fade-in-section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="small pink">Easy discovery</div>
+          <h4>Find activities fast</h4>
+          <p>Search by location, age group, category, and date in one place.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="small orange">Family-focused</div>
+          <h4>Designed for parents</h4>
+          <p>Simple cards, clear filters, and useful details help with quick decisions.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="small blue">Flexible options</div>
+          <h4>Indoor and outdoor ideas</h4>
+          <p>From workshops to sports to library events, families can explore more variety.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION MOVED HERE -->
+  <section id="why-it-matters" class="fade-in-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h3>Why this matters</h3>
+          <p>Raising awareness about how excessive social media use can affect a child’s social development.</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="small pink">Connection</div>
+          <h4>Real-world interaction matters</h4>
+          <p>Children build communication skills, empathy, confidence, and friendships through in-person experiences, group play, and shared activities.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="small orange">Awareness</div>
+          <h4>Too much screen time can replace social time</h4>
+          <p>When social media and screens take up too much time, kids may miss opportunities to practice face-to-face communication and emotional expression.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="small blue">Action</div>
+          <h4>Local activities can help</h4>
+          <p>By helping families discover safe, fun, and engaging activities, we encourage healthier habits and stronger social development outside of screens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="discover" class="fade-in-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h3>Browse by category</h3>
+          <p>Quick filters to help families find the right fit.</p>
+        </div>
+        <a class="btn btn-light" href="#">See all</a>
+      </div>
+
+      <div class="categories">
+        <div class="category-card" data-category="Arts & Crafts">
+          <div class="icon-box"></div>
+          <h4>Arts &amp; Crafts</h4>
+          <p>Explore nearby options</p>
+        </div>
+        <div class="category-card" data-category="STEM">
+          <div class="icon-box"></div>
+          <h4>STEM</h4>
+          <p>Explore nearby options</p>
+        </div>
+        <div class="category-card" data-category="Sports">
+          <div class="icon-box"></div>
+          <h4>Sports</h4>
+          <p>Explore nearby options</p>
+        </div>
+        <div class="category-card" data-category="Music">
+          <div class="icon-box"></div>
+          <h4>Music</h4>
+          <p>Explore nearby options</p>
+        </div>
+        <div class="category-card" data-category="Outdoor">
+          <div class="icon-box"></div>
+          <h4>Outdoor</h4>
+          <p>Explore nearby options</p>
+        </div>
+        <div class="category-card" data-category="Reading">
+          <div class="icon-box"></div>
+          <h4>Reading</h4>
+          <p>Explore nearby options</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured" class="fade-in-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h3>Featured activities</h3>
+          <p>Curated picks for this week.</p>
+        </div>
+
+        <div class="filters">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">Free</span>
+          <span class="filter-chip">Indoor</span>
+          <span class="filter-chip">Weekend</span>
+        </div>
+      </div>
+
+      <div class="activities">
+        <div class="activity-card" data-title="Storytime at the Library" data-description="Interactive storytelling, songs, and simple crafts for younger kids." data-age="3-7" data-date="Today" data-category="Reading">
+          <div class="activity-image"></div>
+          <div class="activity-content">
+            <div class="activity-top">
+              <span class="tag">Reading</span>
+              <span class="age">Ages 3–7</span>
+            </div>
+            <h4>Storytime at the Library</h4>
+            <p class="activity-desc">Interactive storytelling, songs, and simple crafts for younger kids.</p>
+            <p class="meta">Downtown Library</p>
+            <p class="meta">Today · 4:00 PM</p>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <a class="card-btn" href="#" style="flex:1;">View details</a>
+              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card" data-title="Mini Science Lab" data-description="Hands-on experiments with safe, fun materials and guided activities." data-age="6-10" data-date="Tomorrow" data-category="STEM">
+          <div class="activity-image"></div>
+          <div class="activity-content">
+            <div class="activity-top">
+              <span class="tag">STEM</span>
+              <span class="age">Ages 6–10</span>
+            </div>
+            <h4>Mini Science Lab</h4>
+            <p class="activity-desc">Hands-on experiments with safe, fun materials and guided activities.</p>
+            <p class="meta">West Island Community Center</p>
+            <p class="meta">Tomorrow · 1:30 PM</p>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <a class="card-btn" href="#" style="flex:1;">View details</a>
+              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card" data-title="Soccer Skills Clinic" data-description="Beginner-friendly drills, games, and teamwork exercises." data-age="7-12" data-date="This weekend" data-category="Sports">
+          <div class="activity-image"></div>
+          <div class="activity-content">
+            <div class="activity-top">
+              <span class="tag">Sports</span>
+              <span class="age">Ages 7–12</span>
+            </div>
+            <h4>Soccer Skills Club</h4>
+            <p class="activity-desc">Beginner-friendly drills, games, and teamwork exercises.</p>
+            <p class="meta">Mont Royal Field</p>
+            <p class="meta">Saturday · 10:00 AM</p>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <a class="card-btn" href="#" style="flex:1;">View details</a>
+              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card" data-title="Paint &amp; Create Workshop" data-description="Painting, coloring, and mixed-media fun with take-home creations." data-age="5-9" data-date="This weekend" data-category="Arts & Crafts">
+          <div class="activity-image"></div>
+          <div class="activity-content">
+            <div class="activity-top">
+              <span class="tag">Arts &amp; Crafts</span>
+              <span class="age">Ages 5–9</span>
+            </div>
+            <h4>Paint &amp; Create Workshop</h4>
+            <p class="activity-desc">Painting, coloring, and mixed-media fun with take-home creations.</p>
+            <p class="meta">Bright Kids Studio</p>
+            <p class="meta">Sunday · 11:00 AM</p>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <a class="card-btn" href="#" style="flex:1;">View details</a>
+              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card" data-title="Kids Music Jam" data-description="A fun beginner session with rhythm games, singing, and musical instruments." data-age="4-8" data-date="This week" data-category="Music">
+          <div class="activity-image"></div>
+          <div class="activity-content">
+            <div class="activity-top">
+              <span class="tag">Music</span>
+              <span class="age">Ages 4–8</span>
+            </div>
+            <h4>Kids Music Jam</h4>
+            <p class="activity-desc">A fun beginner session with rhythm games, singing, and musical instruments.</p>
+            <p class="meta">Local Elementary School</p>
+            <p class="meta">Friday · 3:30 PM</p>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <a class="card-btn" href="#" style="flex:1;">View details</a>
+              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-card" data-title="Nature Walk Adventure" data-description="Guided outdoor exploration with scavenger hunt activities for kids." data-age="6-11" data-date="This weekend" data-category="Outdoor">
+          <div class="activity-image"></div>
+          <div class="activity-content">
+            <div class="activity-top">
+              <span class="tag">Outdoor</span>
+              <span class="age">Ages 6–11</span>
+            </div>
+            <h4>Nature Walk Adventure</h4>
+            <p class="activity-desc">Guided outdoor exploration with scavenger hunt activities for kids.</p>
+            <p class="meta">Mont Royal Park</p>
+            <p class="meta">Saturday · 9:30 AM</p>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <a class="card-btn" href="#" style="flex:1;">View details</a>
+              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="no-results-message" class="no-results">
+        No activities match this category or filter yet.
+      </div>
+    </div>
+  </section>
+  <section id="partners" class="fade-in-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h3>Our partners</h3>
+          <p>Organizations and companies helping us support families and children.</p>
+        </div>
+      </div>
+
+      <div class="categories">
+        <div class="category-card">
+          <div class="icon-box"></div>
+          <h4>Downtown Library</h4>
+          <p>Community learning partner</p>
+        </div>
+        <div class="category-card">
+          <div class="icon-box"></div>
+          <h4>West Island Community Center</h4>
+          <p>Events and recreation</p>
+        </div>
+        <div class="category-card">
+          <div class="icon-box"></div>
+          <h4>Bright Kids Studio</h4>
+          <p>Creative workshop partner</p>
+        </div>
+        <div class="category-card">
+          <div class="icon-box"></div>
+          <h4>Active Play Co.</h4>
+          <p>Sports activity sponsor</p>
+        </div>
+        <div class="category-card">
+          <div class="icon-box"></div>
+          <h4>STEM Innovator Club</h4>
+          <p>Educational programming</p>
+        </div>
+        <div class="category-card">
+          <div class="icon-box"></div>
+          <h4>Family Wellness Hub</h4>
+          <p>Family outreach partner</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="get-involved" class="fade-in-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h3>Get involved</h3>
+          <p>Stay connected, support families, and help make more local activities accessible.</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="small pink">Newsletter</div>
+          <h4>Subscribe for updates</h4>
+          <p>Get weekly family activity ideas, featured events, and community news.</p>
+          <form style="margin-top: 16px; display: grid; gap: 12px;">
+            <input class="input" type="email" placeholder="Enter your email" style="background:#fff; color:#0f172a; border:1px solid #cbd5e1;" />
+            <button class="btn btn-primary" type="button">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="info-card">
+          <div class="small orange">Volunteer</div>
+          <h4>Sign up to volunteer</h4>
+          <p>Support local events, help families discover resources, and contribute to a more connected community.</p>
+          <form style="margin-top: 16px; display: grid; gap: 12px;">
+            <input class="input" type="text" placeholder="Your name" style="background:#fff; color:#0f172a; border:1px solid #cbd5e1;" />
+            <input class="input" type="email" placeholder="Your email" style="background:#fff; color:#0f172a; border:1px solid #cbd5e1;" />
+            <button class="btn btn-dark" type="button">Join as a Volunteer</button>
+          </form>
+        </div>
+
+        <div class="info-card">
+          <div class="small blue">Save for later</div>
+          <h4>Bookmark activities</h4>
+          <p>Parents can save interesting activities and come back later when planning their week.</p>
+          <div style="margin-top: 16px; display: grid; gap: 12px;">
+            <div style="padding: 14px 16px; border:1px solid #cbd5e1; border-radius: 18px; color:#334155; font-weight:600;">Saved: Storytime at the Library</div>
+            <div style="padding: 14px 16px; border:1px solid #cbd5e1; border-radius: 18px; color:#334155; font-weight:600;">Saved: Mini Science Lab</div>
+            <button class="btn btn-light" type="button">View saved activities</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const searchInput = document.getElementById('search');
+    const ageSelect = document.getElementById('age');
+    const dateSelect = document.getElementById('date');
+    const findActivitiesBtn = document.getElementById('find-activities-btn');
+    const cards = document.querySelectorAll('.activity-card');
+
+    const discoverCategoryCards = document.querySelectorAll('#discover .category-card');
+    const noResultsMessage = document.getElementById('no-results-message');
+
+    let selectedCategory = '';
+
+    function ageMatches(selectedAge, cardAge) {
+      if (selectedAge === 'All ages') return true;
+
+      const [minAge, maxAge] = cardAge.split('-').map(Number);
+
+      if (selectedAge === 'Ages 3–5') return maxAge >= 3 && minAge <= 5;
+      if (selectedAge === 'Ages 6–8') return maxAge >= 6 && minAge <= 8;
+      if (selectedAge === 'Ages 9–12') return maxAge >= 9 && minAge <= 12;
+
+      return true;
+    }
+
+    function dateMatches(selectedDate, cardDate) {
+      if (selectedDate === 'This week') return true;
+      if (selectedDate === 'Today') return cardDate === 'Today';
+      if (selectedDate === 'This weekend') return cardDate === 'This weekend';
+      if (selectedDate === 'Next week') return cardDate === 'Next week';
+      return true;
+    }
+
+    function filterActivities() {
+      const search = searchInput.value.trim().toLowerCase();
+      const selectedAge = ageSelect.value;
+      const selectedDate = dateSelect.value;
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const description = (card.dataset.description || '').toLowerCase();
+        const category = (card.dataset.category || '').toLowerCase();
+        const cardAge = card.dataset.age || '';
+        const cardDate = card.dataset.date || '';
+
+        const matchesSearch =
+          !search ||
+          title.includes(search) ||
+          description.includes(search) ||
+          category.includes(search);
+
+        const matchesAge = ageMatches(selectedAge, cardAge);
+        const matchesDate = dateMatches(selectedDate, cardDate);
+        const matchesCategory =
+          !selectedCategory || category === selectedCategory.toLowerCase();
+
+        if (matchesSearch && matchesAge && matchesDate && matchesCategory) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    discoverCategoryCards.forEach((categoryCard) => {
+      categoryCard.addEventListener('click', () => {
+        const clickedCategory = categoryCard.dataset.category || '';
+
+        if (selectedCategory === clickedCategory) {
+          selectedCategory = '';
+          categoryCard.classList.remove('active-category');
+        } else {
+          selectedCategory = clickedCategory;
+
+          discoverCategoryCards.forEach((card) => {
+            card.classList.remove('active-category');
+          });
+
+          categoryCard.classList.add('active-category');
+        }
+
+        document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+        filterActivities();
+      });
+    });
+
+    searchInput.addEventListener('input', filterActivities);
+    ageSelect.addEventListener('change', filterActivities);
+    dateSelect.addEventListener('change', filterActivities);
+    findActivitiesBtn.addEventListener('click', filterActivities);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    document.querySelectorAll('.fade-in-section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function () {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        target.classList.add('visible');
+      });
+    });
+
+    filterActivities();
+  </script>
+</body>
+</html>
