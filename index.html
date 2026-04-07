@@ -291,13 +291,23 @@
       box-shadow: 0 16px 28px rgba(244, 63, 94, 0.18);
     }
 
-    .icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      background: linear-gradient(to bottom right, #ffe4e6, #ffedd5);
-      margin-bottom: 14px;
-    }
+   .icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(to bottom right, #ffe4e6, #ffedd5);
+  margin-bottom: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box img {
+  width: 60x;
+  height: 60px;
+  object-fit: contain;
+}
 
     .category-card h4 {
       font-size: 1rem;
@@ -668,41 +678,69 @@
         <a class="btn btn-light" href="#">See all</a>
       </div>
 
-      <div class="categories">
-        <div class="category-card" data-category="Arts & Crafts">
-          <div class="icon-box"></div>
-          <h4>Arts &amp; Crafts</h4>
-          <p>Explore nearby options</p>
-        </div>
-        <div class="category-card" data-category="STEM">
-          <div class="icon-box"></div>
-          <h4>STEM</h4>
-          <p>Explore nearby options</p>
-        </div>
-        <div class="category-card" data-category="Sports">
-          <div class="icon-box"></div>
-          <h4>Sports</h4>
-          <p>Explore nearby options</p>
-        </div>
-        <div class="category-card" data-category="Music">
-          <div class="icon-box"></div>
-          <h4>Music</h4>
-          <p>Explore nearby options</p>
-        </div>
-        <div class="category-card" data-category="Outdoor">
-          <div class="icon-box"></div>
-          <h4>Outdoor</h4>
-          <p>Explore nearby options</p>
-        </div>
-        <div class="category-card" data-category="Reading">
-          <div class="icon-box"></div>
-          <h4>Reading</h4>
-          <p>Explore nearby options</p>
-        </div>
+      <section id="discover" class="fade-in-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h3>Browse by category</h3>
+        <p>Quick filters to help families find the right fit.</p>
       </div>
+      <a class="btn btn-light" href="#">See all</a>
     </div>
-  </section>
 
+    <div class="categories">
+
+      <div class="category-card" data-category="Arts & Crafts">
+        <div class="icon-box">
+          <img src="artlogo.png.jpg" alt="Arts & Crafts">
+        </div>
+        <h4>Arts &amp; Crafts</h4>
+        <p>Explore nearby options</p>
+      </div>
+
+      <div class="category-card" data-category="STEM">
+        <div class="icon-box">
+          <img src="stem.jpeg" alt="STEM">
+        </div>
+        <h4>STEM</h4>
+        <p>Explore nearby options</p>
+      </div>
+
+      <div class="category-card" data-category="Sports">
+        <div class="icon-box">
+          <img src="sports.png" alt="Sports">
+        </div>
+        <h4>Sports</h4>
+        <p>Explore nearby options</p>
+      </div>
+
+      <div class="category-card" data-category="Music">
+        <div class="icon-box">
+          <img src="music.jpeg" alt="Music">
+        </div>
+        <h4>Music</h4>
+        <p>Explore nearby options</p>
+      </div>
+
+      <div class="category-card" data-category="Outdoor">
+        <div class="icon-box">
+          <img src="outdoors.png" alt="Outdoor">
+        </div>
+        <h4>Outdoor</h4>
+        <p>Explore nearby options</p>
+      </div>
+
+      <div class="category-card" data-category="Reading">
+        <div class="icon-box">
+          <img src="book.png" alt="Reading">
+        </div>
+        <h4>Reading</h4>
+        <p>Explore nearby options</p>
+      </div>
+
+    </div>
+  </div>
+</section>
   <section id="featured" class="fade-in-section">
     <div class="container">
       <div class="section-head">
