@@ -55,18 +55,6 @@
       font-size: 0.92rem;
     }
 
-    .nav {
-      display: flex;
-      gap: 24px;
-      color: #475569;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .nav a:hover {
-      color: #0f172a;
-    }
-
     .btn {
       display: inline-block;
       border: none;
@@ -303,13 +291,23 @@
       box-shadow: 0 16px 28px rgba(244, 63, 94, 0.18);
     }
 
-    .icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      background: linear-gradient(to bottom right, #ffe4e6, #ffedd5);
-      margin-bottom: 14px;
-    }
+   .icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(to bottom right, #ffe4e6, #ffedd5);
+  margin-bottom: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
 
     .category-card h4 {
       font-size: 1rem;
@@ -521,10 +519,6 @@
         grid-template-columns: 1fr;
       }
 
-      .nav {
-        display: none;
-      }
-
       .categories {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -643,7 +637,6 @@
     </div>
   </section>
 
-  <!-- MISSION MOVED HERE -->
   <section id="why-it-matters" class="fade-in-section">
     <div class="container">
       <div class="section-head">
@@ -729,10 +722,6 @@
         </div>
 
         <div class="filters">
-          <span class="filter-chip active">All</span>
-          <span class="filter-chip">Free</span>
-          <span class="filter-chip">Indoor</span>
-          <span class="filter-chip">Weekend</span>
           <span class="filter-chip active" data-filter="all">All</span>
           <span class="filter-chip" data-filter="free">Free</span>
           <span class="filter-chip" data-filter="indoor">Indoor</span>
@@ -741,8 +730,6 @@
       </div>
 
       <div class="activities">
-        <div class="activity-card" data-title="Storytime at the Library" data-description="Interactive storytelling, songs, and simple crafts for younger kids." data-age="3-7" data-date="Today" data-category="Reading">
-          <div class="activity-image"></div>
         <div class="activity-card"
              data-title="Storytime at the Library"
              data-description="Interactive storytelling, songs, and simple crafts for younger kids."
@@ -769,8 +756,6 @@
           </div>
         </div>
 
-        <div class="activity-card" data-title="Mini Science Lab" data-description="Hands-on experiments with safe, fun materials and guided activities." data-age="6-10" data-date="Tomorrow" data-category="STEM">
-          <div class="activity-image"></div>
         <div class="activity-card"
              data-title="Mini Science Lab"
              data-description="Hands-on experiments with safe, fun materials and guided activities."
@@ -797,8 +782,6 @@
           </div>
         </div>
 
-        <div class="activity-card" data-title="Soccer Skills Clinic" data-description="Beginner-friendly drills, games, and teamwork exercises." data-age="7-12" data-date="This weekend" data-category="Sports">
-          <div class="activity-image"></div>
         <div class="activity-card"
              data-title="Soccer Skills Clinic"
              data-description="Beginner-friendly drills, games, and teamwork exercises."
@@ -825,8 +808,6 @@
           </div>
         </div>
 
-        <div class="activity-card" data-title="Paint &amp; Create Workshop" data-description="Painting, coloring, and mixed-media fun with take-home creations." data-age="5-9" data-date="This weekend" data-category="Arts & Crafts">
-          <div class="activity-image"></div>
         <div class="activity-card"
              data-title="Paint & Create Workshop"
              data-description="Painting, coloring, and mixed-media fun with take-home creations."
@@ -853,42 +834,6 @@
           </div>
         </div>
 
-        <div class="activity-card" data-title="Kids Music Jam" data-description="A fun beginner session with rhythm games, singing, and musical instruments." data-age="4-8" data-date="This week" data-category="Music">
-          <div class="activity-image"></div>
-          <div class="activity-content">
-            <div class="activity-top">
-              <span class="tag">Music</span>
-              <span class="age">Ages 4–8</span>
-            </div>
-            <h4>Kids Music Jam</h4>
-            <p class="activity-desc">A fun beginner session with rhythm games, singing, and musical instruments.</p>
-            <p class="meta">Local Elementary School</p>
-            <p class="meta">Friday · 3:30 PM</p>
-            <div style="display:flex; gap:10px; margin-top:16px;">
-              <a class="card-btn" href="#" style="flex:1;">View details</a>
-              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="activity-card" data-title="Nature Walk Adventure" data-description="Guided outdoor exploration with scavenger hunt activities for kids." data-age="6-11" data-date="This weekend" data-category="Outdoor">
-          <div class="activity-image"></div>
-          <div class="activity-content">
-            <div class="activity-top">
-              <span class="tag">Outdoor</span>
-              <span class="age">Ages 6–11</span>
-            </div>
-            <h4>Nature Walk Adventure</h4>
-            <p class="activity-desc">Guided outdoor exploration with scavenger hunt activities for kids.</p>
-            <p class="meta">Mont Royal Park</p>
-            <p class="meta">Saturday · 9:30 AM</p>
-            <div style="display:flex; gap:10px; margin-top:16px;">
-              <a class="card-btn" href="#" style="flex:1;">View details</a>
-              <button class="card-btn save-btn" type="button" style="flex:1;">Save</button>
-            </div>
-          </div>
-        </div>
-      </div>
        <div class="activity-card"
      data-title="Kids Music Jam"
      data-description="A fun beginner session with rhythm games, singing, and musical instruments."
@@ -958,7 +903,6 @@
 
       <div class="categories">
         <div class="category-card">
-          <div class="icon-box"></div>
           <div class="partner-logo">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLl0g7KYNlXIAEsHbqpEzbPGAv8hAxRT5xzkLIEksogw&s" alt="Downtown Library logo">
           </div>
@@ -967,7 +911,6 @@
         </div>
 
         <div class="category-card">
-          <div class="icon-box"></div>
           <div class="partner-logo">
             <img src="https://crcinfo.ca/wp-content/uploads/2021/10/NOVA.png" alt="West Island Community Center logo">
           </div>
@@ -976,7 +919,6 @@
         </div>
 
         <div class="category-card">
-          <div class="icon-box"></div>
           <div class="partner-logo">
             <img src="https://brightkidsph.com/wp-content/uploads/2025/07/BrightKidsPlus-Logo-Circle-scaled.png" alt="Bright Kids Studio logo">
           </div>
@@ -985,7 +927,6 @@
         </div>
 
         <div class="category-card">
-          <div class="icon-box"></div>
           <div class="partner-logo">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSyl5Yo9N9bT5cMecy8OqAZj1YW-CicLIyIA&s" alt="Active Play Co. logo">
           </div>
@@ -994,7 +935,6 @@
         </div>
 
         <div class="category-card">
-          <div class="icon-box"></div>
           <div class="partner-logo">
             <img src="https://images.cdn-files-a.com/uploads/4266288/800_5f6ce8d65a071.png" alt="STEM Innovator Club logo">
           </div>
@@ -1003,7 +943,6 @@
         </div>
 
         <div class="category-card">
-          <div class="icon-box"></div>
           <div class="partner-logo">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGZY-1l0gsNm8oK-kz-80VJ5WSlIwgLsM5fg&s" alt="Family Wellness Hub logo">
           </div>
@@ -1065,7 +1004,6 @@
     const dateSelect = document.getElementById('date');
     const findActivitiesBtn = document.getElementById('find-activities-btn');
     const cards = document.querySelectorAll('.activity-card');
-
     const discoverCategoryCards = document.querySelectorAll('#discover .category-card');
     const noResultsMessage = document.getElementById('no-results-message');
     const filterChips = document.querySelectorAll('.filter-chip');
@@ -1126,7 +1064,6 @@
           !selectedCategory || category === selectedCategory.toLowerCase();
         const matchesChip = chipMatches(selectedChipFilter, cardType);
 
-        if (matchesSearch && matchesAge && matchesDate && matchesCategory) {
         if (matchesSearch && matchesAge && matchesDate && matchesCategory && matchesChip) {
           card.style.display = 'block';
           visibleCount++;
@@ -1172,7 +1109,6 @@
     searchInput.addEventListener('input', filterActivities);
     ageSelect.addEventListener('change', filterActivities);
     dateSelect.addEventListener('change', filterActivities);
-    findActivitiesBtn.addEventListener('click', filterActivities);
 
     findActivitiesBtn.addEventListener('click', () => {
       document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
@@ -1197,26 +1133,10 @@
           entry.target.classList.add('visible');
         }
       });
-    }, {
-      threshold: 0.15
-    });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.fade-in-section').forEach((section) => {
     fadeSections.forEach((section) => {
       observer.observe(section);
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', function () {
-        const href = this.getAttribute('href');
-        if (!href || href === '#') return;
-
-        const target = document.querySelector(href);
-        if (!target) return;
-
-        target.classList.add('visible');
-      });
     });
 
     filterActivities();
