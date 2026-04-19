@@ -6,4 +6,4 @@ The application showcases the core user interface and user experience design, fo
 
 While backend functionality is not yet implemented, this prototype highlights the overall concept, layout, and intended workflow of the final system.
 
-🔗 **Live Demo:** https://shahsia.github.io/ENGR392/
+🔗 **Live Demo:** https://shahsia.github.io/BeyondTheScreen/
